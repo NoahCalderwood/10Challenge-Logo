@@ -1,5 +1,6 @@
-
+const fs = require('fs');
 const inquirer = require('inquirer');
+const shapes = require('./lib/shapes');
 
 inquirer.prompt([
     {
@@ -36,3 +37,30 @@ inquirer.prompt([
         name: 'shapeColor'
     }
 ])
+.then((data) => {
+    let logoShape = '';
+    switch (data.shape) {
+         case 'Triangle':
+           logoShape = new shapes.Triangle();
+           logoShape.setColor(data.shapeColor);
+           
+         case 'Circle':
+            logoShape = new shapes.Circle();
+            logoShape.setColor(data.shapeColor);
+            
+         case 'Square':
+            logoShape = new shapes.Square();
+            logoShape.setColor(data.shapeColor);
+            
+    }
+    fs.writeFile(`./examples/logo.svg`, 
+    `<svg version="1.1" width="300" height="200" xmlns="http://www.w3.org/2000/svg">
+
+    ${logoShape.render()}
+  
+    <text x="150" y="125" font-size="60" text-anchor="middle" fill="${data.lettersColor}">${data.letters}</text>
+  
+  </svg>`, () => {
+        console.log('Generated logo.svg')
+    }
+)})
