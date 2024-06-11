@@ -43,14 +43,17 @@ inquirer.prompt([
          case 'Triangle':
            logoShape = new shapes.Triangle();
            logoShape.setColor(data.shapeColor);
+           break;
            
          case 'Circle':
             logoShape = new shapes.Circle();
             logoShape.setColor(data.shapeColor);
+            break;
             
          case 'Square':
             logoShape = new shapes.Square();
             logoShape.setColor(data.shapeColor);
+            break;
             
     }
     fs.writeFile(`./examples/logo.svg`, 
